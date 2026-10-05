@@ -417,9 +417,9 @@ const signIn = async () => {
 }
 const getVip = async () => {
     try {
-        const todayKey = new Date().toLocaleDateString('zh-CN', {
-            year: 'numeric', month: '2-digit', day: '2-digit'
-        }).replace(/\//g, '-');
+        const now = new Date();
+        const pad = v => String(v).padStart(2, '0');
+        const todayKey = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
         const vipResponse = await get('/youth/day/vip', {
             receive_day: todayKey
         });
